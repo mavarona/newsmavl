@@ -1,5 +1,7 @@
 {
   "name": "newsmavl",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

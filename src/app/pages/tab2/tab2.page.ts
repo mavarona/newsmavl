@@ -33,7 +33,7 @@ export class Tab2Page implements OnInit {
         .subscribe( resp => {
           this.news.push( ...resp.articles );
           if ( e ) {
-            exports.target.completed();
+            e.target.completed();
           }
         });
   }
