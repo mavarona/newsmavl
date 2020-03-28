@@ -1,8 +1,15 @@
-<ion-card color="dark">
+<ion-card>
     <ion-card-header>
         <ion-card-subtitle>
             <span class="text-primary">{{ index + 1 }}.</span>
             <span class="new-source-name">{{ newData.source.name }}</span>
+            <div class="more-news">
+                <ion-button fill="clear"
+                            (click)="launchMenu()">
+                    <ion-icon slot="icon-only"
+                              name="add-circle"></ion-icon>
+                </ion-button>
+            </div>
         </ion-card-subtitle>
         <ion-card-title (click)="openNews()">{{ newData.title }}</ion-card-title>
     </ion-card-header>
