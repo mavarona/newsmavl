@@ -16,6 +16,11 @@ const headers = new HttpHeaders({
 })
 export class NewsService {
 
+  headLinesPage = 0;
+
+  categoryCurrent = '';
+  categoryPage = 0;
+
   constructor(private http: HttpClient) { }
 
   private executeQuery<T>( query: string ) {
@@ -27,11 +32,18 @@ export class NewsService {
   }
 
   getTopNews() {
-    return this.executeQuery<ResponseTopNews>(`/top-headlines?country=us`);
+    this.headLinesPage++;
+    return this.executeQuery<ResponseTopNews>(`/top-headlines?country=us&page=${ this.headLinesPage }`);
   }
 
   getTopNewsCategory( category: string ) {
-    return this.executeQuery<ResponseTopNews>(`/top-headlines?country=us&category=${ category }`);
+    if (this.categoryCurrent === category){
+      this.categoryPage++;
+    } else {
+      this.categoryPage = 1;
+      this.categoryCurrent = category;
+    }
+    return this.executeQuery<ResponseTopNews>(`/top-headlines?country=us&category=${ category }&page=${ this.categoryCurrent }`);
   }
 
 }
