@@ -15,6 +15,7 @@ export class NewsComponent implements OnInit {
 
   @Input() newData: Article;
   @Input() index: Number;
+  @Input() inFavorites;
 
   constructor( private iab: InAppBrowser,
                private actionSheetCtrl: ActionSheetController,
@@ -28,6 +29,27 @@ export class NewsComponent implements OnInit {
   }
 
   async launchMenu() {
+
+    let saveDeleteButton = null;
+
+    if ( this.inFavorites ) {
+      saveDeleteButton = {
+        text: 'Borrar',
+        icon: 'trash',
+        handler: () => {
+          this.dataLocalService.deleteNews( this.newData );
+        }
+      };
+    } else {
+      saveDeleteButton = {
+        text: 'Favoritos',
+        icon: 'star',
+        handler: () => {
+          this.dataLocalService.saveNews( this.newData );
+        }
+      };
+    }
+
     const actionSheet = await this.actionSheetCtrl.create({
       buttons: [
         {
@@ -42,13 +64,7 @@ export class NewsComponent implements OnInit {
             );
           }
         },
-        {
-          text: 'Favoritos',
-          icon: 'star',
-          handler: () => {
-            this.dataLocalService.saveNews( this.newData );
-          }
-        },
+        saveDeleteButton,
         {
           text: 'Cancelar',
           icon: 'close',

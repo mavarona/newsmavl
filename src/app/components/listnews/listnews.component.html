@@ -2,7 +2,10 @@
     <ion-row>
         <ion-col  size="12" size-lg="3" size-md="4" size-sm="6" size-xs="12"
             *ngFor="let newData of news; let i = index">
-          <app-news [newData]="newData" [index]="i"></app-news>
+          <app-news 
+            [newData]="newData"
+            [inFavorites]="inFavorites" 
+            [index]="i"></app-news>
         </ion-col>
     </ion-row>
 </ion-grid>

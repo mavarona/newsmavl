@@ -31,4 +31,9 @@ export class DataLocalService {
     }
   }
 
+  deleteNews( news: Article ) {
+    this.listNews = this.listNews.filter ( item => item.title !== news.title );
+    this.storage.set('favorites', this.listNews);
+  }
+
 }
